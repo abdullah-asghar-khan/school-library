@@ -4,16 +4,21 @@ require_relative 'capitalize_decorator'
 require_relative 'trimmer_decorator'
 require_relative 'base_decorator'
 
-# This is person class
+# This is Person class
 class Person < Nameable
-  attr_reader :id
-  attr_accessor :name, :age
-
   def initialize(age, name, parent_permission: true)
-    @id = SecureRandom.uuid
+    @id = rand(1..1000)
     @name = name
     @age = age
     @parent_permission = parent_permission
+    super()
+  end
+
+  attr_reader :id
+  attr_accessor(:name, :age)
+
+  def correct_name
+    @name
   end
 
   def can_use_services?
