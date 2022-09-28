@@ -1,3 +1,4 @@
+# This is Book class
 require_relative 'rental'
 
 class Book
