@@ -134,4 +134,59 @@ class App
     check_age.call
   end
 
-  
+  def create_teacher
+    print 'Name: '
+    name = gets.chomp
+    check_age = lambda do
+      print 'Age: '
+      age = gets.chomp
+      puts "\n"
+      if number? age
+        print 'Specialization: '
+        specialization = gets.chomp
+        teacher = Teacher.new(specialization, age, name)
+        @people << teacher
+        puts "\n"
+        puts 'New teacher created successfully'
+      else
+        puts 'Please input a number as age must be a number'
+        puts "\n"
+        check_age.call
+      end
+    end
+    check_age.call
+  end
+
+  def create_rental_helper
+    puts "\n"
+    puts 'Select a book from the following list by number'
+    @books.each_with_index do |book, index|
+      puts "No. #{index + 1}) - Book Title : #{book.title} | Author : #{book.author}"
+    end
+    marked_book = gets.chomp.to_i
+    puts "\n"
+    puts 'Select a person from the following list by number (not id)'
+    puts "\n"
+    @people.each_with_index do |person, index|
+      puts "No. #{index + 1}) - Name : #{person.name} |ID : #{person.id} | Age : #{person.age}"
+    end
+    puts "\n"
+    rental_person = gets.chomp.to_i
+    check_date = lambda do
+      print 'Date (YYYY/MM/DD) : '
+      date = gets.chomp.to_s
+      if valid_date? date
+        rental_obj = Rental.new(date, @books[marked_book - 1], @people[rental_person - 1])
+        @rentals.push(rental_obj)
+        puts "\n"
+        puts 'Rental created successfully'
+      else
+        puts 'Invalid Date or format: please enter correct date'
+        puts "\n"
+        check_date.call
+      end
+    end
+    check_date.call
+  end
+end
+# rubocop:enable Metrics/MethodLength, Metrics/ClassLength
