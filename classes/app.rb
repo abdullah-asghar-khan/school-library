@@ -24,3 +24,15 @@ class App
     puts 'Book successfully created'
     puts "\n"
   end
+
+  def list_books
+    if @books.empty?
+      puts "\n"
+      puts 'No books in the library'
+      return
+    end
+    @books.each do |book|
+      puts "Title : #{book.title} | Author : #{book.author}"
+    end
+    puts "\n"
+  end
