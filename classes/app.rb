@@ -36,3 +36,24 @@ class App
     end
     puts "\n"
   end
+
+  def create_person
+    print 'Do you want to create a student (1) or a teacher (2) ? [Input a number] : '
+    puts "\n"
+    get_choice = lambda do
+      choice = gets.chomp
+      case choice
+      when '1'
+        create_student
+      when '2'
+        create_teacher
+      else
+        puts "\n"
+        puts 'Please enter a valid number [1 or 2]'
+        puts "\n"
+        get_choice.call
+      end
+      puts "\n"
+    end
+    get_choice.call
+  end
