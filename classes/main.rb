@@ -1,5 +1,6 @@
 require_relative 'app'
 
+# This is TempMain class
 class TempMain
   def self.display_options
     puts 'Please choose an option by entering a number:
