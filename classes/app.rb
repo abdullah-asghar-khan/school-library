@@ -5,6 +5,7 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
 
+# rubocop:disable Metrics/MethodLength, Metrics/ClassLength
 # This is App class
 class App
   def initialize
