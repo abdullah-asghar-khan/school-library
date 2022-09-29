@@ -68,3 +68,68 @@ class App
       puts "\n"
     end
   end
+
+  def create_rental
+    if @books.size.zero?
+      puts "\n No books in the library\n"
+    elsif @people.size.zero?
+      puts 'No one registered in the library'
+      puts "\n"
+    else
+      create_rental_helper
+    end
+  end
+
+  def list_rentals
+    puts "\n"
+    if @rentals.empty?
+      puts 'No rent is registered in the library'
+    else
+      puts 'Select a person from the following list by ID'
+      @people.each do |person|
+        puts "ID : #{person.id} => #{person.name}"
+      end
+      puts "\n"
+      print "Enter person\'s ID :"
+      person_id = gets.chomp
+      @rentals.each do |rental|
+        if rental.person.id.to_i == person_id.to_i
+          puts "Date : #{rental.date}, Book \"#{rental.book.title}\" by : #{rental.book.author}"
+        end
+      end
+    end
+  end
+
+  private
+
+  def valid_date?(str, format = '%Y/%m/%d')
+    Date.strptime(str, format)
+  rescue StandardError
+    false
+  end
+
+  def number?(obj)
+    obj = obj.to_s unless obj.is_a? String
+    /\A[+-]?\d+(\.\d+)?\z/.match(obj)
+  end
+
+  def create_student
+    print 'Name: '
+    name = gets.chomp
+    check_age = lambda do
+      print 'Age: '
+      age = gets.chomp
+      puts "\n"
+      if number? age
+        student = Student.new(age, name, nil)
+        @people << student
+        puts "\n"
+        puts 'New student created successfully'
+      else
+        puts 'Please input a number as age must be a number'
+        puts "\n"
+        check_age.call
+      end
+    end
+    check_age.call
+  end
