@@ -1,4 +1,3 @@
-# require_relative 'securerandom'
 require_relative 'nameable'
 require_relative 'capitalize_decorator'
 require_relative 'trimmer_decorator'
@@ -9,12 +8,12 @@ require_relative 'book'
 # This is Person class
 class Person < Nameable
   def initialize(age, name, parent_permission: true)
+    super()
     @id = rand(1..1000)
     @name = name
     @age = age
     @parent_permission = parent_permission
     @rentals = []
-    super()
   end
 
   attr_reader :id
