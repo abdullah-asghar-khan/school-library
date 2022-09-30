@@ -81,24 +81,12 @@ class App
     end
   end
 
-  def list_rentals
-    puts "\n"
-    if @rentals.empty?
-      puts 'No rent is registered in the library'
-    else
-      puts 'Select a person from the following list by ID'
-      @people.each do |person|
-        puts "ID : #{person.id} => #{person.name}"
-      end
-      puts "\n"
-      print "Enter person\'s ID :"
-      person_id = gets.chomp
-      @rentals.each do |rental|
-        if rental.person.id.to_i == person_id.to_i
-          puts "Date : #{rental.date}, Book \"#{rental.book.title}\" by : #{rental.book.author}"
-        end
-      end
-    end
+  def list_all_rentals
+    print 'ID of person:'
+    person_id = gets.chomp.to_i
+    rentals = @rentals.select { |rental| rental.person.id == person_id }
+    puts 'Rentals:'
+    rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" }
   end
 
   private
@@ -122,7 +110,7 @@ class App
       age = gets.chomp
       puts "\n"
       if number? age
-        student = Student.new(age, name, nil)
+        student = Student.new(name, age, nil)
         @people << student
         puts "\n"
         puts 'New student created successfully'

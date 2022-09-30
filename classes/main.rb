@@ -29,7 +29,7 @@ class TempMain
     when 5
       app.create_rental
     when 6
-      app.list_rentals
+      app.list_all_rentals
     when 7
       puts "\n"
       puts 'Thank you for using this app!'
